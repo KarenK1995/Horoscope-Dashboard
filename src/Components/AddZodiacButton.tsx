@@ -42,11 +42,15 @@ export default function AddZodiacButton() {
         description: ZodiacDescInputValue,
       };
       try {
-        const result = await Axios.post(`${endpoint}/zodiac/${lang}`, zodiac, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const result = await Axios.post(
+          `${endpoint}/zodiac?language=${lang}`,
+          zodiac,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         console.log(result);
         navigate(`/zodiac/refresh/${lang}`);
       } catch (err) {
