@@ -12,7 +12,7 @@ export default function ZodiacData() {
   const [Zodiacs, setZodiacs] = useState([] as zodiacDataType[]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    Axios.get(`${endpoint}/zodiac/${lang}`)
+    Axios.get(`${endpoint}/zodiac/signDetails?language=${lang}`)
       .then((res) => {
         setZodiacs(res.data);
         setIsLoading(false);

@@ -20,11 +20,15 @@ export default function SymbolsModal(params: { zodiac: zodiacDataType }) {
         zodiacid: zodiac.zodiacid,
       };
       try {
-        const result = await Axios.post(`${endpoint}/symbol/${lang}`, symbol, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const result = await Axios.post(
+          `${endpoint}/symbol?language=${lang}`,
+          symbol,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         console.log(result);
         setSymbolsList([...SymbolsList, result.data]);
         setSymbolCase(true);

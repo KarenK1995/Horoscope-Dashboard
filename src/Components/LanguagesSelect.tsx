@@ -10,7 +10,7 @@ export default function LanguagesSelect() {
 
   const [languages, setlanguages] = useState([] as languagesType[]);
   useEffect(() => {
-    Axios.get(`${endpoint}/zodiac/languages`).then((res) => {
+    Axios.get(`${endpoint}/language`).then((res) => {
       setlanguages(res.data);
     });
   }, []);

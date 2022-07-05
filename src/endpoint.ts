@@ -1,1 +1,1 @@
-export const endpoint = "https://horoscope-rewrite.herokuapp.com/api";
+export const endpoint = "https://horoscope-migrartion.herokuapp.com/api";
