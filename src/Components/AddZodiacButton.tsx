@@ -21,13 +21,13 @@ export default function AddZodiacButton() {
     Axios.get(`${endpoint}/zodiac`).then((res) => {
       setZodiacs(res.data);
     });
-    Axios.get(`${endpoint}/zodiac/${lang}`)
-      .then((res) => {
-        setZodiacsData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Axios.get(`${endpoint}/zodiac/${lang}`)
+    //   .then((res) => {
+    //     setZodiacsData(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, [lang]);
 
   const handleSubmit = async () => {

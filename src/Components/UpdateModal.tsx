@@ -1,11 +1,12 @@
 import Axios from "axios";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { Params, useParams } from "react-router-dom";
+import { Params, useNavigate, useParams } from "react-router-dom";
 import { endpoint } from "../endpoint";
 import { zodiacDataType } from "../Types/zodiacTypes";
 
 export default function UpdateModal(params: { zodiac: zodiacDataType }) {
+  const navigate = useNavigate();
   const { lang }: { lang?: Readonly<Params<string>> } = useParams();
   const { zodiac } = params;
   const [ZodiacName, setZodiacName] = useState(zodiac.name);
@@ -23,6 +24,7 @@ export default function UpdateModal(params: { zodiac: zodiacDataType }) {
             "Content-Type": "application/json",
           },
         });
+        navigate(`/zodiac/refresh/${lang}`);
       } catch (err) {
         console.log(err);
       }
