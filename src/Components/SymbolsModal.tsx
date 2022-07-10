@@ -4,6 +4,7 @@ import { Button, Form, Modal, Table } from "react-bootstrap";
 import { Params, useParams } from "react-router-dom";
 import { endpoint } from "../endpoint";
 import { zodiacDataType } from "../Types/zodiacTypes";
+import { FaTrash } from "react-icons/fa";
 
 export default function SymbolsModal(params: { zodiac: zodiacDataType }) {
   const { lang }: { lang?: Readonly<Params<string>> } = useParams();
@@ -37,6 +38,31 @@ export default function SymbolsModal(params: { zodiac: zodiacDataType }) {
       }
     }
   };
+  const DeleteSymbole = async (name: string, zodiacid: string) => {
+    const symbol = {
+      name: name,
+      zodiacid: zodiac.zodiacid,
+    };
+    try {
+      const result = await Axios({
+        method: "delete",
+        url: `${endpoint}/symbol?language=${lang}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: symbol,
+      });
+      console.log(result);
+      setSymbolsList(
+        SymbolsList.filter((symb) => {
+          return symb.name !== name && symb.zodiacid !== zodiacid;
+        })
+      );
+      setSymbolCase(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <Modal.Header closeButton>
@@ -51,6 +77,7 @@ export default function SymbolsModal(params: { zodiac: zodiacDataType }) {
               <tr>
                 <th>Name</th>
                 <th>Value</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -58,6 +85,13 @@ export default function SymbolsModal(params: { zodiac: zodiacDataType }) {
                 <tr key={index}>
                   <td>{symbol.name}</td>
                   <td>{symbol.value}</td>
+                  <td>
+                    <FaTrash
+                      onClick={() => {
+                        DeleteSymbole(symbol.name, symbol.value);
+                      }}
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
